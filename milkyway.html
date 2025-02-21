@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Educational Content | MilkyWay</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Amazon+Ember:wght@400;700&display=swap" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+ 
+ 
+
+</head>
+
+
+<body>
+
+  
+
+  <!-- Header -->
+  <div class="header">
+    <div class="site-title"><strong>MilkyWay</strong></div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search for topics...">
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+    <h2 style="text-align: center; color: #111;">Explore Educational Topics</h2>
+
+    <p class="disclaimer">
+      Browse through a collection of educational resources and topics. Click on any topic to explore more.
+    </p>
+
+    <div id="content-grid"></div>
+  </div>
+
+  <script>
+    const spreadsheetId = "1uC34hI5AT2Uxrp5rVmEpsc07-4aRrKnRaMcjpiUVZJw";
+    const apiKey = "AIzaSyCAY4rjXddC2nK1TNbu5SEQawCYLty9k04";
+    const sheetRange = "reading_content!A1:B"; // Changed to reading_content
+
+    function fetchContentData() {
+      fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${sheetRange}?key=${apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+          const rows = data.values.slice(1); // Skip header row
+          displayContent(rows);
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    }
+
+    function displayContent(contentList) {
+    const contentGrid = document.getElementById("content-grid");
+    contentGrid.innerHTML = ""; // Clear previous content
+
+    contentList.forEach(([title, imageUrl], index) => {
+      if (!title || !imageUrl) return;
+
+      const tile = document.createElement("div");
+      tile.classList.add("content-tile");
+
+      // Create a proper relative link
+      const tileLink = document.createElement("a");
+      tileLink.href = `content.html?row=${index + 3}`; // Pass row number
+      tileLink.classList.add("tile-link");
+
+      tileLink.innerHTML = `
+        <div class="tile-image" style="background-image: url('${imageUrl}');"></div>
+        <div class="tile-title">${title}</div>
+      `;
+
+      tile.appendChild(tileLink);
+      contentGrid.appendChild(tile);
+    });
+  }
+
+    fetchContentData();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Activity</title>
+  <link href="styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- FontAwesome for Icons -->
+</head>
+<body>
+  <audio id="background-music" src="https://samplelib.com/lib/preview/mp3/sample-15s.mp3"></audio>
+  <div class="header">
+    <div class="site-title">Learning Activity</div>
+  </div>
+
+  <div class="content-wrapper">
+    <h2 id="title">Loading...</h2> <!-- Title from Google Sheets -->
+    <div id="content-display" class="hidden">
+      <button id="close-content" class="close-btn">❌</button>
+        <h3 id="activity-title"></h3>
+        <p id="activity-content"></p>
+      </div>
+      
+    <div id="activity-grid"></div> <!-- Activity Tiles Go Here -->
+
+    <div id="content-display" class="hidden">
+      <h3 id="activity-title"></h3>
+      <p id="activity-content"></p>
+    </div>
+  </div>
+
+
+
+
+  <script src="content.js"></script> <!-- Separate script file for cleaner code -->
+
+</body>
+</html>
