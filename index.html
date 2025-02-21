@@ -65,10 +65,13 @@
       tileLink.href = `content.html?row=${index + 3}`; // Pass row number
       tileLink.classList.add("tile-link");
 
-      tileLink.innerHTML = `
-        <div class="tile-image" style="background-image: url('${imageUrl}');"></div>
-        <div class="tile-title">${title}</div>
-      `;
+// Extract only the text before "-"
+const shortTitle = title.includes("-") ? title.split("-")[0].trim() : title;
+
+tileLink.innerHTML = `
+    <div class="tile-image" style="background-image: url('${imageUrl}');"></div>
+    <div class="tile-title">${shortTitle}</div>
+`;
 
       tile.appendChild(tileLink);
       contentGrid.appendChild(tile);
